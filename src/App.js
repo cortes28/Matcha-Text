@@ -303,7 +303,7 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      const userRef = firestore.collection('users').doc(user.uid);
+      const userRef = firestore.collection('users').doc(auth.currentUser.uid);
       userRef.set({ status: 'online' }, { merge: true });
     }
   }, [user]);
@@ -343,7 +343,7 @@ function App() {
     if (user) {
       // Update user status to "offline" in Firestore before signing out
       console.log("Going to sign out...")
-      const userRef = firestore.collection('users').doc(user.uid);
+      const userRef = firestore.collection('users').doc(auth.currentUser.uid);
       userRef.set({ status: 'offline' }, { merge: true });
     }
     auth.signOut();
@@ -460,10 +460,18 @@ function App() {
 // Generate key pair
 function generateKeyPair() {
   return new Promise((resolve, reject) => {
+
+    console.log("generating the key pair...")
     // Generate RSA key pair
-    const rsaKeyPair = forge.pki.rsa.generateKeyPair({ bits: 2048 });
+    const rsaKeyPair = forge.pki.rsa.generateKeyPair({bits: 2048, e: 0x10001});
+    // const rsaKeyPair = forge.pki.rsa.generateKeyPair({ bits: 2048 });
     const publicKeyPem = forge.pki.publicKeyToPem(rsaKeyPair.publicKey);
     const privateKeyPem = forge.pki.privateKeyToPem(rsaKeyPair.privateKey);
+
+    // console.log(publicKeyPem)
+    // console.log(privateKeyPem)
+
+
 
     resolve({
       publicKey: publicKeyPem,
