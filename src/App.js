@@ -18,13 +18,9 @@ const forge = require('node-forge');
 
 // initialization fo the 
 firebase.initializeApp({
-  apiKey: "AIzaSyDT_C1IIyv5ud4C44P8lKdLIsoWpjVsleY",
-  authDomain: "something-5a43f.firebaseapp.com",
-  projectId: "something-5a43f",
-  storageBucket: "something-5a43f.appspot.com",
-  messagingSenderId: "831854510764",
-  appId: "1:831854510764:web:b902890727e6eaac4b5509",
-  measurementId: "G-8RHCV6BNLY"
+/*information to accessing the Firebase database that 
+is generated when u create a database for the web app...
+*/
 })
 
 const auth = firebase.auth();
